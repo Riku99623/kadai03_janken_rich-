@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>じゃんけん</title>
+</head>
+<body>
+
+<header>
+  <h1>じゃんけんゲーム</h1>
+</header>
+
+<main> 
+   <p class="select">選んでください</p>
+  <ul>
+   <div class="selecthands">
+    <button type="button" id="gu_btn"><img src="./janken_gu.png" alt="グー"></button>
+    <button type="button" id="cho_btn"><img src="./janken_choki.png" alt="チョキ"></button>
+    <button type="button" id="par_btn"><img src="./janken_pa.png" alt="パー"></button>
+   </div>
+  </ul>
+  <P>コンピュータの出す手は？</P>
+  
+  <div><span id="pc_hands">
+   <img src="./janken_gu.png" alt="" class="img">
+   <img src="./janken_choki.png" alt="" class="img">
+   <img src="./janken_pa.png" alt="" class="img">
+  </span></div>
+  <div id="judgment"></div>
+  
+  <div class="score">
+   <h2>今回のスコア</h2>
+   <p>対戦回数：<span id="count">0</span></p>  
+   <p>勝利回数：<span id="win-count">0</span></p>
+   <p>敗北回数：<span id="lose-count">0</span></p>
+   <p>勝率：<span id="win-rate">0</span>%</p>
+ </div>
+
+ <p><button type="button" id="onemore" >もう一回</button></p>
+  <p><button type="button" id="resetbutton" >リセット</button></p>
+</main>
+
+<footer></footer>
+<script>
+//じゃんけん用のSCRIPTを書いてください
+
+let count =0;
+let winCount = 0;
+let loseCount = 0;
+let winrate = 0;
+
+// グー
+$("#gu_btn").on("click",function(){
+ const r1 = Math.random()*3; //小数点0.000000~0.999999
+ const n1 = Math.ceil(r1); //繰り上げ0.01→1
+ console.log(n1);
+ if(n1 == 1){
+    $("#pc_hands").html('<img src="janken_gu.png">'); //文字を上書き
+    $("#pc_hands").css("width","10%");
+    $("#judgment").html("あいこ"); //文字を上書き
+    $("#judgment").css("text-align","center");
+    $("#judgment").css("font-size","100px");
+    count ++;
+    $("#count").html(count);
+    winrate = (winCount/count)*100;
+    const percent = Math.ceil(winrate);
+    $("#win-rate").html(percent);
+ }
+ if(n1 == 2){
+    $("#pc_hands").html('<img src="janken_choki.png">');
+    $("#judgment").html("あなたの勝ちです");
+    $("#judgment").css("text-align","center");
+    $("#judgment").css("font-size","100px");
+    count ++;
+    $("#count").html(count);
+    winCount ++;
+    $("#win-count").html(winCount);
+    winrate = (winCount/count)*100;
+    const percent = Math.ceil(winrate);
+    $("#win-rate").html(percent);
+
+ }
+ if(n1 == 3){
+    $("#pc_hands").html('<img src="janken_pa.png">');
+    $("#judgment").html("あなたの負けです");
+    $("#judgment").css("text-align","center");
+    $("#judgment").css("font-size","100px");
+    count ++;
+    $("#count").html(count);
+    loseCount ++;
+    $("#lose-count").html(loseCount);
+    winrate = (winCount/count)*100;
+    const percent = Math.ceil(winrate);
+    $("#win-rate").html(percent);
+ }
+});
+
+// チョキ
+$("#cho_btn").on("click",function(){
+ const r2 = Math.random()*3; //小数点0.000000~0.999999
+ const n2 = Math.ceil(r2); //繰り上げ0.01→1
+ console.log(n2);
+ if(n2 == 1){
+    $("#pc_hands").html('<img src="janken_gu.png">'); //文字を上書き
+    $("#judgment").html("あなたの負けです");//文字を上書き
+    $("#judgment").css("text-align","center");
+    $("#judgment").css("font-size","100px");
+    count ++;
+    $("#count").html(count);
+    loseCount ++;
+    $("#lose-count").html(loseCount);
+    winrate = (winCount/count)*100;
+    const percent = Math.ceil(winrate);
+    $("#win-rate").html(percent);
+ }
+ if(n2 == 2){
+    $("#pc_hands").html('<img src="janken_choki.png">');
+    $("#judgment").html("あいこ");
+    $("#judgment").css("text-align","center");
+    $("#judgment").css("font-size","100px");  
+    count ++;
+    $("#count").html(count);
+    winrate = (winCount/count)*100;
+    const percent = Math.ceil(winrate);
+    $("#win-rate").html(percent);
+ }
+ if(n2 == 3){
+    $("#pc_hands").html('<img src="janken_pa.png">');
+    $("#judgment").html("あなたの勝ちです");
+    $("#judgment").css("text-align","center");
+    $("#judgment").css("font-size","100px"); 
+    count ++;
+    $("#count").html(count);
+    winCount ++;
+    $("#win-count").html(winCount);
+    winrate = (winCount/count)*100;
+    const percent = Math.ceil(winrate);
+    $("#win-rate").html(percent);
+}});
+
+// パー
+$("#par_btn").on("click",function(){
+ const r3 = Math.random()*3; //小数点0.000000~0.999999
+ const n3 = Math.ceil(r3); //繰り上げ0.01→1
+ console.log(n3);
+ if(n3 == 1){
+    $("#pc_hands").html('<img src="janken_gu.png">'); //文字を上書き
+    $("#judgment").html("あなたの勝ちです"); //文字を上書き
+    $("#judgment").css("text-align","center");
+    $("#judgment").css("font-size","100px"); 
+    count ++;
+    $("#count").html(count);
+    winCount ++;
+    $("#win-count").html(winCount);
+    winrate = (winCount/count)*100;
+    const percent = Math.ceil(winrate);
+    $("#win-rate").html(percent);
+ }
+ if(n3 == 2){
+    $("#pc_hands").html('<img src="janken_choki.png">');
+    $("#judgment").html("あなたの負けです");
+    $("#judgment").css("text-align","center");
+    $("#judgment").css("font-size","100px");
+    count ++;
+    $("#count").html(count);
+    loseCount ++;
+    $("#lose-count").html(loseCount);
+    winrate = (winCount/count)*100;
+    const percent = Math.ceil(winrate);
+    $("#win-rate").html(percent);
+ }
+ if(n3 == 3){
+    $("#pc_hands").html('<img src="janken_pa.png">');
+    $("#judgment").html("あいこ");
+    $("#judgment").css("text-align","center");
+    $("#judgment").css("font-size","100px"); 
+    count ++;
+    $("#count").html(count);
+    winrate = (winCount/count)*100;
+    const percent = Math.ceil(winrate);
+    $("#win-rate").html(percent);
+ }
+});
+
+
+const imgs = $(".img");
+let imgIndex = -1;
+imgs.hide();
+
+function showNextImg() {
+  imgIndex++;
+  imgs
+    .eq(imgIndex % imgs.length)
+    .fadeIn(20)
+    .fadeOut(70, showNextImg);
+}
+showNextImg();
+
+$("#onemore").on("click",function(){
+   function showNextImg() {
+  imgIndex++;
+  imgs
+    .eq(imgIndex % imgs.length)
+    .fadeIn(25)
+    .fadeOut(80, showNextImg);
+}
+showNextImg();
+});
+
+//無効化
+$("#gu_btn").on("click",function(){
+  $("#gu_btn").prop("disabled", true)
+  $("#cho_btn").prop("disabled", true)
+  $("#par_btn").prop("disabled", true)
+});
+
+$("#cho_btn").on("click",function(){
+  $("#gu_btn").prop("disabled", true)
+  $("#cho_btn").prop("disabled", true)
+  $("#par_btn").prop("disabled", true)
+});
+
+$("#par_btn").on("click",function(){
+  $("#gu_btn").prop("disabled", true)
+  $("#cho_btn").prop("disabled", true)
+  $("#par_btn").prop("disabled", true)
+});
+
+
+$("#resetbutton").on("click",function(){
+   location.reload();
+})   
+
+</script>
+</body>
+</html>
